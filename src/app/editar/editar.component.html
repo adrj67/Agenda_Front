@@ -1,0 +1,43 @@
+{{contacto.idcontacto}}
+{{contacto.nombre}}
+<!--
+<div class="container" *ngIf="contacto">
+    <div class="row mt-5">
+        <div class="col-md-8 mx-auto">
+            <form (ngSubmit)="update()" novalidate #f="ngForm">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" style="background-color:#F0FFFF" name="nombre" [(ngModel)]="contacto.nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="apellido">Apellido</label>
+                    <input type="text" class="form-control" id="apellido" style="background-color:#F0FFFF" name="apellido" [(ngModel)]="contacto.apellido" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Telefonos</label>
+                    <div *ngFor="let telefono of contacto.telefonoList; let i = index">
+                      <input type="text" class="form-control" style="background-color:#F0FFFF"
+                        name="telefono{{i}}" [(ngModel)]="contacto.telefonoList[i]">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="correo">Correos</label>
+                    <div *ngFor="let correo of contacto.correoList; let i = index">
+                      <input type="text" class="form-control" style="background-color:#F0FFFF"
+                        name="correo{{i}}" [(ngModel)]="contacto.correoList[i]">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="direccion">Direcciones</label>
+                    <div *ngFor="let direccion of contacto.direccionList; let i = index">
+                      <input class="form-control" style="background-color:#F0FFFF"
+                        name="direccion{{i}}" [(ngModel)]="contacto.direccionList[i].descripcion">
+                    </div>
+                  </div>
+                <br>
+                <button type="submit" class="btn btn-outline-success" [disabled]="!f.valid">Actualizar Contacto</button>              
+            </form>
+        </div>
+    </div>
+</div>
+<a href="#" (click)="volver()">volver</a> -->

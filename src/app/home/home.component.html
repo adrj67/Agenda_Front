@@ -1,0 +1,161 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1><span>B</span><span>i</span><span>e</span><span>n</span>
+                <span>v</span><span>e</span><span>n</span><span>i</span>
+                <span>d</span><span>o</span><span>&nbsp; </span>
+                <span>{{usuario.nombre}}</span>&nbsp; <span>{{usuario.apellido}}</span>
+                <span>!!</span></h1>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <hr>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <a href="#" (click)="logout()">Cerrar sesion</a>
+        </div>
+    </div>
+    <div class="row" *ngIf="loading">
+        <div class="col-md-12">
+            <div class="spinner-border text-info float-end" role="status">
+                <span class="sr-only">Cargando...</span>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Mis Contactos: <button class="btn btn-success" (click)="agregar()">Nuevo</button></h2>
+        </div>
+    </div>
+    <form (ngSubmit)="crearContacto()" id="crear" *ngIf="crear">
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text"  class="form-control" 
+                [(ngModel)]="contacto.nombre" [ngModelOptions]="{standalone: true}"
+                placeholder="Nombre" required>
+            </div>
+        </div>
+        <!-- https://www.youtube.com/watch?v=i2FSX979E1g&t=689s Parte 9 minuto 5:30-->
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text"  class="form-control" 
+                [(ngModel)]="contacto.apellido" [ngModelOptions]="{standalone: true}"
+                placeholder="Apellido" required>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                Telefonos:<button class="btn btn-outline-warning btn-sm" (click)="agregarTelefono()">Agregar</button>
+            </div>
+        </div>
+        <div class="row" *ngFor="let telefono of contacto.telefonoList">
+            <br>
+            <br>
+            <div class="col-md-11">
+                <input type="text"  class="form-control" 
+                [(ngModel)]="telefono.numero" [ngModelOptions]="{standalone: true}"
+                placeholder="Numero" required>
+            </div>
+            <div class="col-md-1">
+                <button class="btn btn-danger btn-sm" (click)="borrarTelefono(telefono)">Borrar</button>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                Correos:<button class="btn btn-outline-warning btn-sm" (click)="agregarCorreo()">Agregar</button>
+            </div>
+        </div>
+        <div class="row" *ngFor="let correo of contacto.correoList">
+            <br>
+            <br>
+            <div class="col-md-11">
+                <input type="email"  class="form-control" 
+                [(ngModel)]="correo.correo" [ngModelOptions]="{standalone: true}"
+                placeholder="Correo" required>
+            </div>
+            <div class="col-md-1">
+                <button class="btn btn-danger btn-sm" (click)="borrarCorreo(correo)">Borrar</button>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                Direccion:<button class="btn btn-outline-warning btn-sm" (click)="agregarDireccion()">Agregar</button>
+            </div>
+        </div>
+        <div class="row" *ngFor="let direccion of contacto.direccionList">
+            <br>
+            <br>
+            <div class="col-md-11">
+                <input type="text"  class="form-control" 
+                [(ngModel)]="direccion.descripcion" [ngModelOptions]="{standalone: true}"
+                placeholder="Direccion" required>
+            </div>
+            <div class="col-md-1">
+                <button class="btn btn-danger btn-sm" (click)="borrarDireccion(direccion)">Borrar</button>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="submit" class="btn btn-primary float-end" value="Crear">   
+            </div>
+        </div>
+    </form>
+    <!-- {{this.usuario.correo}}  mostrar los datos-->
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Telefono</th>
+                        <th>Correo</th>
+                        <th>Direccion</th>
+                        <th>Modificar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let contacto of contactos">
+                        <td>
+                            {{contacto.idcontacto}}
+                        </td>
+                        <td>
+                            {{contacto.nombre}}
+                        </td>
+                        <td>
+                            {{contacto.apellido}}
+                        </td>
+                        <td>
+                            <ul>
+                                <li *ngFor="let telefono of contacto.telefonoList">{{telefono.numero}}</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li *ngFor="let correo of contacto.correoList">{{correo.correo}}</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li *ngFor="let direccion of contacto.direccionList">{{direccion.descripcion}}</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-outline-warning" routerLink="/editar/{{contacto.idcontacto}}">Editar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

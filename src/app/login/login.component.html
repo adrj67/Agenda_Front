@@ -1,0 +1,64 @@
+<body class="d-flex align-items-center justify-content-center" style="min-height: 100vh;" >
+<div class="container text-center">
+    <br>
+    <div class="row">
+        <div class="col-md-12">    
+            <div id="divArriba">
+                <h2>Bienvenido!</h2>
+            </div>
+            <div>
+                <h3> &mdash; Agenda de contactos &mdash;</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <hr>
+    </div>
+    <div class="row" *ngIf="loading"><!--   -->
+        <div class="col-md-12">
+            <div class="spinner-border text-info float-end" role="status">
+                <span class="sr-only">Cargando...</span>
+            </div>
+        </div>
+    </div>
+    <form id="login" (ngSubmit)="login()"><!--    -->
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text"  class="form-control" 
+                [(ngModel)]="usuario.correo" [ngModelOptions]="{standalone: true}"
+                placeholder="Correo" required>
+            <!--   -->
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="password" class="form-control"
+                [(ngModel)]="usuario.password" [ngModelOptions]="{standalone: true}" 
+                placeholder="Contraseña" required>
+            <!--    -->
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <input class="button" type="submit" value="Ingresar"><span class="button-content"></span>
+            </div>
+        </div>
+    </form>
+    <br>
+    <div class="row" *ngIf="errorInicio"><!--   -->
+        <label class="float-end" style="color: red">Usuario o password incorrecto.</label>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <label class="float-end" (click)="crearCuenta()">
+                Si no tienes una cuenta con nosotros haz <a class="bn31 float-end" href="#"><span class="bn31span float-end">click aqui</span></a>
+            <!--   -->
+            </label>
+        </div>
+        <br>
+    </div>
+</div>
+</body>
+<!-- https://www.youtube.com/watch?v=Q6nFeVuV020 -->

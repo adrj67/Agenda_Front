@@ -1,0 +1,138 @@
+<head>
+    <!--meta name="viewport" content="width=device-width, initial-scale=1"-->
+    <style>
+    @import url(https://fonts.googleapis.com/css?family=Neuton|Oswald);
+
+    body {
+    background-color:#a4a5a3;
+    }
+
+    body p{ font: 400 1em/1.5 "Neuton"; 
+    background: #090d00; 
+    color: rgba(255,255,255,.25); 
+    text-align: center; 
+    position: relative;
+    top: 10px; 
+    }
+
+    div.container {
+    margin-top: 2%; 
+    }
+
+    p {
+        text-transform: uppercase;
+        letter-spacing: .5em;
+        display: inline-block;
+        border: 4px double rgba(255,255,255,.25);
+        border-width: 4px 0;
+        padding: 1.5em 0em;
+        position:absolute;
+        top: 18%;
+        left: 50%;
+        width: 40em;
+        margin: 0 0 0 -20em;
+    }
+    
+    span {
+
+        font: 700 4em/1 "Oswald", sans-serif;
+        letter-spacing: 0;
+        padding: .25em 0 .325em;
+        display: block;
+        margin: 0 auto;
+        text-shadow: 0 0 80px rgba(255,255,255,.5);
+
+    /* Clip Background Image */
+
+        background: url(https://i.ibb.co/RDTnNrT/animated-text-fill.png) repeat-y;
+        -webkit-background-clip: text;
+        background-clip: text;
+
+    /* Animate Background Image */
+        
+        -webkit-text-fill-color: transparent;
+        -webkit-animation: aitf 80s linear infinite;
+
+    /* Activate hardware acceleration for smoother animations */
+
+        -webkit-transform: translate3d(0,0,0);
+        -webkit-backface-visibility: hidden;
+
+    }
+
+    /* Animate Background Image */
+
+    @-webkit-keyframes aitf {
+        0% { background-position: 0% 50%; }
+        100% { background-position: 100% 50%; }
+    }
+    </style>
+</head>
+
+<body>
+    <p>
+        Crea tu cuenta ahora!
+        <span>
+        Agenda para contactos
+        </span>
+        &mdash; Direccion-Telefono-Correo &mdash;
+    </p>
+    <div class="row" *ngIf="loading">
+        <div class="col-md-12">
+            <div class="spinner-border text-info float-end" role="status">
+                <span class="sr-only">Cargando...</span>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <form id="crear" (ngSubmit)="crear()">
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="email"  class="form-control" 
+                    [(ngModel)]="usuario.correo" [ngModelOptions]="{standalone: true}"
+                    placeholder="Correo" required>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="text"  class="form-control" 
+                    [(ngModel)]="usuario.nombre" [ngModelOptions]="{standalone: true}"
+                    placeholder="Nombre" required>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="text"  class="form-control" 
+                    [(ngModel)]="usuario.apellido" [ngModelOptions]="{standalone: true}"
+                    placeholder="Apellido" required>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="password" class="form-control"
+                    [(ngModel)]="usuario.password" [ngModelOptions]="{standalone: true}" 
+                    placeholder="Contraseña" required>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <input class="btn btn-success float-end" type="submit" value="Crear">
+                </div>
+            </div>
+        </form>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <label class="float-end" (click)="regresar()">
+                <a href="#" >Regresar</a>
+                </label>
+            </div>
+        </div>
+        <br>
+        <br>
+    </div>
+</body>
