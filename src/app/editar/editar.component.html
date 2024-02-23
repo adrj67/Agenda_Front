@@ -1,43 +1,156 @@
-{{contacto.idcontacto}}
-{{contacto.nombre}}
-<!--
-<div class="container" *ngIf="contacto">
-    <div class="row mt-5">
-        <div class="col-md-8 mx-auto">
-            <form (ngSubmit)="update()" novalidate #f="ngForm">
-                <div class="form-group">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" style="background-color:#F0FFFF" name="nombre" [(ngModel)]="contacto.nombre" required>
-                </div>
-                <div class="form-group">
-                    <label for="apellido">Apellido</label>
-                    <input type="text" class="form-control" id="apellido" style="background-color:#F0FFFF" name="apellido" [(ngModel)]="contacto.apellido" required>
-                </div>
-                <div class="form-group">
-                    <label for="telefono">Telefonos</label>
-                    <div *ngFor="let telefono of contacto.telefonoList; let i = index">
-                      <input type="text" class="form-control" style="background-color:#F0FFFF"
-                        name="telefono{{i}}" [(ngModel)]="contacto.telefonoList[i]">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="correo">Correos</label>
-                    <div *ngFor="let correo of contacto.correoList; let i = index">
-                      <input type="text" class="form-control" style="background-color:#F0FFFF"
-                        name="correo{{i}}" [(ngModel)]="contacto.correoList[i]">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="direccion">Direcciones</label>
-                    <div *ngFor="let direccion of contacto.direccionList; let i = index">
-                      <input class="form-control" style="background-color:#F0FFFF"
-                        name="direccion{{i}}" [(ngModel)]="contacto.direccionList[i].descripcion">
-                    </div>
-                  </div>
-                <br>
-                <button type="submit" class="btn btn-outline-success" [disabled]="!f.valid">Actualizar Contacto</button>              
-            </form>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+          <h1><span>EDITAR CONTACTO: </span>
+            <span>{{contacto.idcontacto}} &nbsp; {{contacto.nombre}}</span>&nbsp; <span>Del Usuario: {{contacto.usuariocorreo}}</span>
+            <p>{{contacto.idcorreo}}</p>
+          </h1>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <hr>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <a href="#" (click)="logout()">Cerrar sesion</a>
+        </div>
+    </div>
+    <div class="row" *ngIf="loading">
+        <div class="col-md-12">
+            <div class="spinner-border text-info float-end" role="status">
+                <span class="sr-only">Cargando...</span>
+            </div>
+        </div>
+    </div>
+    <br>
+    <form [formGroup]="contacto" (ngSubmit)="onUpdate()"> 
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text"  class="form-control" 
+                [(ngModel)]="contacto.nombre" [ngModelOptions]="{standalone: true}"
+                placeholder="Nombre" required>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text"  class="form-control" 
+                [(ngModel)]="contacto.apellido" [ngModelOptions]="{standalone: true}"
+                placeholder="Apellido" required>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="submit" class="btn btn-primary float-end" (click)="onUpdate ()" value="Actualizar">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                Telefonos:<button class="btn btn-outline-warning btn-sm" (click)="agregarTelefono()">Agregar</button>
+            </div>
+        </div>
+        <div class="row" *ngFor="let telefono of contacto.telefonoList">
+            <br>
+            <br>
+            <div class="col-md-10">
+                <input type="text"  class="form-control" 
+                [(ngModel)]="telefono.numero" [ngModelOptions]="{standalone: true}"
+                placeholder="Numero" required>
+            </div>
+            <div class="col-md-1">
+                <button class="btn btn-danger btn-sm" (click)="borrarTelefono(telefono)" title="Elimina solo este Telefono">Borrar</button>
+            </div>
+           
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                Correos:<button class="btn btn-outline-warning btn-sm" (click)="agregarCorreo()">Agregar</button>
+            </div>
+        </div>
+        <div class="row" *ngFor="let correo of contacto.correoList">
+            <br>
+            <br>
+            <div class="col-md-10">
+                <input type="email"  class="form-control" 
+                [(ngModel)]="correo.correo" [ngModelOptions]="{standalone: true}"
+                placeholder="Correo" required>
+            </div>
+            <div class="col-md-1">
+                <button class="btn btn-danger btn-sm" (click)="borrarCorreo(correo)" title="Elimina solo este Correo">Borrar</button>
+            </div>
+            
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                Direccion:<button class="btn btn-outline-warning btn-sm" (click)="agregarDireccion()">Agregar</button>
+            </div>
+        </div>
+        <div class="row" *ngFor="let direccion of contacto.direccionList">
+            <br>
+            <br>
+            <div class="col-md-10">
+                <input type="text"  class="form-control" 
+                [(ngModel)]="direccion.descripcion" [ngModelOptions]="{standalone: true}"
+                placeholder="Direccion" required>
+            </div>
+            <div class="col-md-1">
+                <button class="btn btn-danger btn-sm" (click)="borrarDireccion(direccion)" title="Elimina solo esta Direccion">Borrar</button>
+            </div>   
+        </div>
+
+
+    
+    </form>
+      
+    
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead >
+                    <tr class="table-dark">
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Telefono</th>
+                        <th>Correo</th>
+                        <th>Direccion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="table-primary">
+                            {{contacto.idcontacto}}
+                        </td>
+                        <td class="table-primary">
+                            {{contacto.nombre}}
+                        </td>
+                        <td class="table-primary">
+                            {{contacto.apellido}}
+                        </td>
+                        <td class="table-primary">
+                            <ul>
+                                <li *ngFor="let telefono of contacto.telefonoList">{{telefono.numero}}</li>
+                            </ul>
+                        </td>
+                        <td class="table-primary">
+                            <ul>
+                                <li *ngFor="let correo of contacto.correoList">{{correo.correo}}</li>
+                            </ul>
+                        </td>
+                        <td class="table-primary">
+                            <ul>
+                                <li *ngFor="let direccion of contacto.direccionList">{{direccion.descripcion}}</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
-<a href="#" (click)="volver()">volver</a> -->

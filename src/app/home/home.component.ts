@@ -12,6 +12,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class HomeComponent implements OnInit {
 
+  idcontacto:number = 0;
   usuario:any = {};
   contactos:any = [];
   contacto:any = {};
@@ -111,4 +112,18 @@ export class HomeComponent implements OnInit {
     this.contacto.direccionList.splice(this.contacto.direccionList.indexOf(direccion), 1);
   }
 // https://www.youtube.com/watch?v=i2FSX979E1g&t=689s    Parte 9
+
+// ========== inicio borrar contacto =====================================
+borrarContacto(id: number) {
+  this.http.delete(`http://localhost:8080/contacto/eliminar/${id}`).subscribe({
+    next: () => {
+      alert('Contacto eliminado exitosamente.');
+      this.buscarContactos();
+    },
+    error: (error: any) => {
+      console.error('Error al borrar el contacto:', error);
+    }
+  });
+}
+// ========== FIN borrar contacto =====================================
 }
