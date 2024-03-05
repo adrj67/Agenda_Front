@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    let formulario:any = document.getElementById("login");
+    let formulario:any = document.getElementById("loginform");
     let formularioValido:boolean = formulario.reportValidity();
     if (formularioValido){
       this.loading = true;

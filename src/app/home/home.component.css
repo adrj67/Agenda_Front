@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Signika:700,300,600);
 
 html, body { height: 100%; }
-body { display: flex; justify-content: center; align-items: center; margin:20px 0; text-align:center; background:beige; overflow:hidden; }
+body { display: flex; justify-content: center; align-items: center; text-align:center; background:beige; overflow:hidden; }
 
 h1 {
  font-size:2em;
@@ -40,3 +40,64 @@ h1 span:nth-child(11){ animation-delay:.5s; }
 h1 span:nth-child(12){ animation-delay:.55s; }
 h1 span:nth-child(13){ animation-delay:.6s; }
 h1 span:nth-child(14){ animation-delay:.65s; }
+
+
+form#crear input:not([type="submit"]){
+  background-color:rgb(167, 113, 238);
+  color: rgb(255, 255, 255);
+  
+}
+
+::placeholder {
+  color: rgb(158, 221, 240);
+  opacity: 5; /* Firefox */
+}
+
+button {
+  border: 1px solid #000;
+}
+
+#botonCrear {
+  /* Aquí puedes agregar los estilos que desees */
+  margin-top: 20px; /* Por ejemplo, agreguemos un margen superior de 20px */
+  text-align: center; /* Centramos el contenido horizontalmente */
+  
+}
+
+#botonCrear input[type="submit"] {
+  /* Estilos específicos para el botón de enviar dentro de #botonCrear */
+  /* background-color:#0d6efd !important; */ /* Color de fondo */
+  /*color: rgb(248, 243, 243); */ /* Color del texto */ 
+  padding: 10px 20px; /* Espaciado interno */
+  border: 1px solid #f3f6f7;
+  border-radius: 10px; /* Añadimos esquinas redondeadas */
+  cursor: pointer; /* Cambiamos el cursor al pasar por encima */
+  transition: background-color 0.3s; /* Efecto de transición */
+}
+
+#botonCrear input[type="submit"]:hover {
+  /* Estilos al pasar el mouse por encima del botón */
+  background-color: #3ff748; /* Cambiamos el color de fondo */
+  color: rgb(0, 0, 0);
+}
+
+body {
+ /* background-color: #ffdd90; */
+  background-image: url('src/assets/image/fondoRojo.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed; 
+}
+
+a, b {
+  color: rgb(236, 233, 44);
+}
+
+#crear{
+  background-image: url('src/assets/image/fondoCrear.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed; 
+}

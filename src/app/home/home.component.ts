@@ -18,10 +18,12 @@ export class HomeComponent implements OnInit {
   contacto:any = {};
   crear:boolean = false;
   loading:boolean = false;
+  filterPost:any = '';
 
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
+
     this.usuario = JSON.parse(localStorage.getItem("usuario") || '{}');
     if(!this.usuario){
       location.href = "/";
@@ -29,6 +31,7 @@ export class HomeComponent implements OnInit {
       this.contacto = {usuariocorreo:this.usuario.correo, correoList:[], telefonoList:[], direccionList:[]};
       this.buscarContactos();
     }
+
   }
 
   logout(){
@@ -86,6 +89,7 @@ export class HomeComponent implements OnInit {
     }
   this.contacto = { usuariocorreo:this.usuario.correo, correoList:[], telefonoList:[], direccionList:[]};
   this.buscarContactos();
+  this.agregar();
   }
 
   agregarTelefono(){

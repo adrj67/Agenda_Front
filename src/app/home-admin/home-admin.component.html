@@ -1,15 +1,96 @@
-<div class="container">
-    <div class="row">
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1><span>B</span><span>i</span><span>e</span><span>n</span>
+                    <span>v</span><span>e</span><span>n</span><span>i</span>
+                    <span>d</span><span>o</span><span>&nbsp; </span>
+                    <span>{{usuario.nombre}}</span>&nbsp; <span>{{usuario.apellido}}</span>
+                    <span>!!</span></h1>
+                    <h2>{{usuario.rolIdrol}} - Administrador</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input type="text" class="form-group" name="filterPost" 
+                    placeholder="Search ..." [(ngModel)]= "filterPost">
+                    Puedes buscar por Nombre, Apellido o Usuario
+                </div>
+            </div>
+        </div>
         <div class="col-md-12">
-            <h1>Bienvenido Administrador!</h1>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <a href="#" (click)="logout()"><b>Cerrar sesion</b></a>
+            </div>
+        </div>
+        <div class="row" *ngIf="loading">
+            <div class="col-md-12">
+                <div class="spinner-border text-info float-end" role="status">
+                    <span class="sr-only">Cargando...</span>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="table-dark">
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Telefono</th>
+                            <th>Correo</th>
+                            <th>Direccion</th>
+                            <th>Usuario.Correo</th>
+                            <th>Modificar</th>
+                            <th>Borrar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let contacto of contactos | filter: filterPost">
+                            <td class="table-secondary">
+                                {{contacto.idcontacto}}
+                            </td>
+                            <td class="table-secondary">
+                                {{contacto.nombre}}
+                            </td>
+                            <td class="table-secondary">
+                                {{contacto.apellido}}
+                            </td>
+                            <td class="table-secondary">
+                                <ul>
+                                    <li *ngFor="let telefono of contacto.telefonoList">{{telefono.numero}}</li>
+                                </ul>
+                            </td>
+                            <td class="table-secondary">
+                                <ul>
+                                    <li *ngFor="let correo of contacto.correoList">{{correo.correo}}</li>
+                                </ul>
+                            </td>
+                            <td class="table-secondary">
+                                <ul>
+                                    <li *ngFor="let direccion of contacto.direccionList">{{direccion.descripcion}}</li>
+                                </ul>
+                            </td>
+                            <td class="table-secondary">
+                                {{contacto.usuariocorreo}}
+                            </td>
+                            <td class="table-secondary">
+                                <button type="button" class="btn btn-outline-warning" routerLink="/editar/{{contacto.idcontacto}}">Editar</button>
+                            </td>
+                            <td class="table-secondary">
+                                <button type="button" class="btn btn-outline-danger" (click)="borrarContacto(contacto.idcontacto)" title="Elimina el 'contacto' y todos sus datos">Borrar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-    <div class="col-md-12">
-        <hr>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <a href="#" (click)="logout()">Cerrar sesion</a>
-        </div>
-    </div>
-</div>
+    </body>

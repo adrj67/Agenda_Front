@@ -1,9 +1,9 @@
+<body>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
           <h1><span>EDITAR CONTACTO: </span>
-            <span>{{contacto.idcontacto}} &nbsp; {{contacto.nombre}}</span>&nbsp; <span>Del Usuario: {{contacto.usuariocorreo}}</span>
-            <p>{{contacto.idcorreo}}</p>
+            <span>{{contacto.idcontacto}} &nbsp; {{contacto.nombre}}</span>
           </h1>
         </div>
     </div>
@@ -11,8 +11,11 @@
         <hr>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-2">
             <a href="#" (click)="logout()">Cerrar sesion</a>
+        </div>
+        <div class="col-md-5 float-end">
+            <button class="btn btn-danger btn-sm" (click)="volver()">Volver al listado</button> <!-- href="/home" -->
         </div>
     </div>
     <div class="row" *ngIf="loading">
@@ -26,7 +29,7 @@
     <form [formGroup]="contacto" (ngSubmit)="onUpdate()"> 
         <br>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12">Nombre: 
                 <input type="text"  class="form-control" 
                 [(ngModel)]="contacto.nombre" [ngModelOptions]="{standalone: true}"
                 placeholder="Nombre" required>
@@ -34,7 +37,7 @@
         </div>
         <br>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12"> Apellido: 
                 <input type="text"  class="form-control" 
                 [(ngModel)]="contacto.apellido" [ngModelOptions]="{standalone: true}"
                 placeholder="Apellido" required>
@@ -49,7 +52,7 @@
         <br>
         <div class="row">
             <div class="col-md-12">
-                Telefonos:<button class="btn btn-outline-warning btn-sm" (click)="agregarTelefono()">Agregar</button>
+                Telefonos: <button class="btn btn-outline-warning btn-sm" (click)="agregarTelefono()">Agregar</button>
             </div>
         </div>
         <div class="row" *ngFor="let telefono of contacto.telefonoList">
@@ -68,7 +71,7 @@
         <br>
         <div class="row">
             <div class="col-md-12">
-                Correos:<button class="btn btn-outline-warning btn-sm" (click)="agregarCorreo()">Agregar</button>
+                Correos: <button class="btn btn-outline-warning btn-sm" (click)="agregarCorreo()">Agregar</button>
             </div>
         </div>
         <div class="row" *ngFor="let correo of contacto.correoList">
@@ -87,7 +90,7 @@
         <br>
         <div class="row">
             <div class="col-md-12">
-                Direccion:<button class="btn btn-outline-warning btn-sm" (click)="agregarDireccion()">Agregar</button>
+                Direccion: <button class="btn btn-outline-warning btn-sm" (click)="agregarDireccion()">Agregar</button>
             </div>
         </div>
         <div class="row" *ngFor="let direccion of contacto.direccionList">
@@ -102,9 +105,6 @@
                 <button class="btn btn-danger btn-sm" (click)="borrarDireccion(direccion)" title="Elimina solo esta Direccion">Borrar</button>
             </div>   
         </div>
-
-
-    
     </form>
       
     
@@ -154,3 +154,4 @@
         </div>
     </div>
 </div>
+</body>

@@ -12,6 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { HomeAdminComponent } from './home-admin/home-admin.component';
 import { EditarComponent } from './editar/editar.component';
+import { FilterPipe } from './pipes/filter.pipe';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { EditarComponent } from './editar/editar.component';
     HomeComponent,
     SigninComponent,
     HomeAdminComponent,
-    EditarComponent
+    EditarComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,4 @@
+<body>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -8,12 +9,21 @@
                 <span>!!</span></h1>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <a><b>Puedes buscar por Nombre o Apellido: </b></a>
+                <input type="text" class="form-group" name="filterPost" 
+                placeholder="Search ..." [(ngModel)]= "filterPost">
+            </div>
+        </div>
+    </div>
     <div class="col-md-12">
         <hr>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <a href="#" (click)="logout()">Cerrar sesion</a>
+            <a href="#" (click)="logout()"><b>Cerrar sesion</b></a>
         </div>
     </div>
     <div class="row" *ngIf="loading">
@@ -25,23 +35,22 @@
     </div>
     <br>
     <div class="row">
-        <div class="col-md-12">
-            <h2>Mis Contactos: <button class="btn btn-success" (click)="agregar()">Nuevo</button></h2>
+        <div class="col-md-12  bg-secondary text-white">
+            <h2>Mis Contactos: <button class="btn btn-primary" (click)="agregar()">Nuevo</button></h2> 
         </div>
     </div>
     <form (ngSubmit)="crearContacto()" id="crear" *ngIf="crear">
         <br>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-5">
                 <input type="text"  class="form-control" 
                 [(ngModel)]="contacto.nombre" [ngModelOptions]="{standalone: true}"
                 placeholder="Nombre" required>
             </div>
         </div>
-        <!-- https://www.youtube.com/watch?v=i2FSX979E1g&t=689s Parte 9 minuto 5:30-->
         <br>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-5">
                 <input type="text"  class="form-control" 
                 [(ngModel)]="contacto.apellido" [ngModelOptions]="{standalone: true}"
                 placeholder="Apellido" required>
@@ -49,14 +58,14 @@
         </div>
         <br>
         <div class="row">
-            <div class="col-md-12">
-                Telefonos:<button class="btn btn-outline-warning btn-sm" (click)="agregarTelefono()">Agregar</button>
+            <div class="col-md-4" style="color: white">
+                Telefonos:   <button class="btn btn-warning btn-sm" (click)="agregarTelefono()">Agregar</button>
             </div>
         </div>
         <div class="row" *ngFor="let telefono of contacto.telefonoList">
             <br>
             <br>
-            <div class="col-md-11">
+            <div class="col-md-4">
                 <input type="text"  class="form-control" 
                 [(ngModel)]="telefono.numero" [ngModelOptions]="{standalone: true}"
                 placeholder="Numero" required>
@@ -67,14 +76,14 @@
         </div>
         <br>
         <div class="row">
-            <div class="col-md-12">
-                Correos:<button class="btn btn-outline-warning btn-sm" (click)="agregarCorreo()">Agregar</button>
+            <div class="col-md-4" style="color: white">
+                Correos:<button class="btn btn-warning btn-sm" (click)="agregarCorreo()">Agregar</button>
             </div>
         </div>
         <div class="row" *ngFor="let correo of contacto.correoList">
             <br>
             <br>
-            <div class="col-md-11">
+            <div class="col-md-4">
                 <input type="email"  class="form-control" 
                 [(ngModel)]="correo.correo" [ngModelOptions]="{standalone: true}"
                 placeholder="Correo" required>
@@ -85,14 +94,14 @@
         </div>
         <br>
         <div class="row">
-            <div class="col-md-12">
-                Direccion:<button class="btn btn-outline-warning btn-sm" (click)="agregarDireccion()">Agregar</button>
+            <div class="col-md-4" style="color: white">
+                Direccion:<button class="btn btn-warning btn-sm" (click)="agregarDireccion()">Agregar</button>
             </div>
         </div>
         <div class="row" *ngFor="let direccion of contacto.direccionList">
             <br>
             <br>
-            <div class="col-md-11">
+            <div class="col-md-4">
                 <input type="text"  class="form-control" 
                 [(ngModel)]="direccion.descripcion" [ngModelOptions]="{standalone: true}"
                 placeholder="Direccion" required>
@@ -102,19 +111,18 @@
             </div>
         </div>
         <br>
-        <div class="row">
-            <div class="col-md-12">
+        <div  id="botonCrear" class="row">
+            <div class="d-grid gap-4 col-6 mx-auto">
                 <input type="submit" class="btn btn-primary float-end" value="Crear">   
             </div>
         </div>
     </form>
-    <!-- {{this.usuario.correo}}  mostrar los datos-->
     <br>
     <div class="row">
         <div class="col-md-12">
-            <table class="table">
+            <table class="table table-bordered">
                 <thead>
-                    <tr>
+                    <tr class="table-dark">
                         <th>Id</th>
                         <th>Nombre</th>
                         <th>Apellido</th>
@@ -126,35 +134,35 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let contacto of contactos">
-                        <td>
+                    <tr *ngFor="let contacto of contactos  | filter: filterPost">
+                        <td class="table-secondary">
                             {{contacto.idcontacto}}
                         </td>
-                        <td>
+                        <td class="table-secondary">
                             {{contacto.nombre}}
                         </td>
-                        <td>
+                        <td class="table-secondary">
                             {{contacto.apellido}}
                         </td>
-                        <td>
+                        <td class="table-secondary">
                             <ul>
                                 <li *ngFor="let telefono of contacto.telefonoList">{{telefono.numero}}</li>
                             </ul>
                         </td>
-                        <td>
+                        <td class="table-secondary">
                             <ul>
                                 <li *ngFor="let correo of contacto.correoList">{{correo.correo}}</li>
                             </ul>
                         </td>
-                        <td>
+                        <td class="table-secondary">
                             <ul>
                                 <li *ngFor="let direccion of contacto.direccionList">{{direccion.descripcion}}</li>
                             </ul>
                         </td>
-                        <td>
+                        <td class="table-secondary">
                             <button type="button" class="btn btn-outline-warning" routerLink="/editar/{{contacto.idcontacto}}">Editar</button>
                         </td>
-                        <td>
+                        <td class="table-secondary">
                             <button type="button" class="btn btn-outline-danger" (click)="borrarContacto(contacto.idcontacto)" title="Elimina el 'contacto' y todos sus datos">Borrar</button>
                         </td>
                     </tr>
@@ -163,3 +171,4 @@
         </div>
     </div>
 </div>
+</body>

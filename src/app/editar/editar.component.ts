@@ -17,8 +17,7 @@ export class EditarComponent implements OnInit {
   usuario:any = {};
   contacto:any = {};
   id:number = 0;
-  loading:boolean = false;
-  
+  loading:boolean = false;  
 
   constructor(private formBuilder: FormBuilder, 
     //private formGroup: FormGroup,
@@ -37,6 +36,8 @@ export class EditarComponent implements OnInit {
     }
 
   ngOnInit(): void {
+
+    this.usuario = JSON.parse(localStorage.getItem("usuario") || '{}');
 
     this.route.params.subscribe(params => {
       this.id = +params['id']; // Convierte el parámetro 'id' de string a número
@@ -80,7 +81,8 @@ export class EditarComponent implements OnInit {
     }
     });
     //console.log('Finalizando onUpdate()...');
-    location.href = "/home";
+    this.volver();
+    //location.href = "/home";
   }
 
   public update(id: number, contacto: any): Observable<any> {
@@ -114,7 +116,7 @@ export class EditarComponent implements OnInit {
         alert('Telefono eliminado exitosamente.');
         this.getContactoPorId(this.id).subscribe((data: any) => {
           this.contacto = data;
-          location.href = "/home";
+          this.volver();
         });
       },
       error: (error: any) => {
@@ -139,7 +141,7 @@ export class EditarComponent implements OnInit {
         // También puedes actualizar la lista de correos en la UI
         this.getContactoPorId(this.id).subscribe((data: any) => {
           this.contacto = data;
-          location.href = "/home";
+          this.volver();
         });
       },
       error: (error: any) => {
@@ -159,7 +161,7 @@ export class EditarComponent implements OnInit {
         alert('Direccion eliminada exitosamente.');
         this.getContactoPorId(this.id).subscribe((data: any) => {
           this.contacto = data;
-          location.href = "/home";
+          this.volver();
         });
       },
       error: (error: any) => {
@@ -172,5 +174,18 @@ export class EditarComponent implements OnInit {
   logout(){
     localStorage.removeItem("usuario");
     location.href = "/";    
+  }
+
+  volver(){
+
+    // alert('ROL: ' + this.usuario.rolIdrol)
+    if(this.usuario.rolIdrol == 2){
+      location.href = "/home";
+    } else if (this.usuario.rolIdrol == 1) {
+      location.href = "/home-admin";
+    } else {
+      location.href = "/";
+    }
+
   }
 }

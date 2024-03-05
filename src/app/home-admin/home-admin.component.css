@@ -1,0 +1,8 @@
+body {
+    /* background-color: #ffdd90; */
+     background-image: url('src/assets/image/fondoAdmin.jpg');
+     background-size: cover;
+     background-repeat: no-repeat;
+     background-position: center center;
+     background-attachment: fixed; 
+   }

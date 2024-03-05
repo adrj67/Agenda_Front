@@ -1,0 +1,16 @@
+body {
+    /* background-color: #ffdd90; */
+    background-image: url('src/assets/image/anaskuu7.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed; 
+  }
+
+div {
+  color: white;
+}
+
+a {
+  color: rgb(236, 233, 44);
+}
